@@ -9,13 +9,15 @@ import android.os.Handler
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import com.example.foodapp.databinding.ActivityMainBinding
-import kotlinx.android.synthetic.main.activity_main.ButtonplayerOne
-import kotlinx.android.synthetic.main.activity_main.ButtonplayerTwo
 import kotlinx.android.synthetic.main.activity_main.ImageReplay
 import kotlinx.android.synthetic.main.activity_main.button
 import kotlinx.android.synthetic.main.activity_main.imagePause
 import kotlinx.android.synthetic.main.activity_main.imageSetting
-import kotlinx.android.synthetic.main.activity_main.timeedit
+import kotlinx.android.synthetic.main.activity_main.textButton1
+import kotlinx.android.synthetic.main.activity_main.textButton2
+import kotlinx.android.synthetic.main.activity_main.textView6
+import kotlinx.android.synthetic.main.activity_main.textView7
+import kotlinx.android.synthetic.main.activity_main.timeEdit
 
 @Suppress("DEPRECATION")
 class MainActivity : AppCompatActivity() {
@@ -30,37 +32,48 @@ class MainActivity : AppCompatActivity() {
 
         val mp = MediaPlayer.create(this,R.raw.click)
         binding.imagePause.setOnClickListener {
-            if (a == 2) { binding.imagePause.setBackgroundResource(R.drawable.pause);a = 1;timerOn = true;time() }
-            else if (a == 1) { binding.imagePause.setBackgroundResource(R.drawable.play);a = 2;timerOn = false}
+            if (a == 2) { binding.imagePause.setBackgroundResource(R.drawable.pause);a = 1;timerOn = true;time()
+                binding.ButtonPlayerTwo.setBackgroundColor(Color.rgb(149, 149, 149))
+                binding.ButtonPlayerOne.setBackgroundColor(Color.rgb(244, 182, 59))}
+            else if (a == 1) { binding.imagePause.setBackgroundResource(R.drawable.play);a = 2;timerOn = false
+                binding.ButtonPlayerTwo.setBackgroundColor(Color.rgb(149, 149, 149))
+                binding.ButtonPlayerOne.setBackgroundColor(Color.rgb(149, 149, 149))}
         }
 
         binding.imageSetting.setOnClickListener {
-                timeedit.visibility = View.VISIBLE
+                timeEdit.visibility = View.VISIBLE
                 button.visibility = View.VISIBLE
                 imageSetting.visibility = View.INVISIBLE
                 ImageReplay.visibility = View.INVISIBLE
                 imagePause.visibility = View.INVISIBLE
             button.setOnClickListener {
-                times1 = timeedit.text.toString();time1 = times1.toInt();time2 = times1.toInt()
-                timeedit.visibility = View.INVISIBLE
+                times1 = timeEdit.text.toString();time1 = times1.toInt();time2 = times1.toInt()
+                timeEdit.visibility = View.INVISIBLE
                 button.visibility= View.INVISIBLE;
                 imageSetting.visibility = View.VISIBLE
                 ImageReplay.visibility = View.VISIBLE
                 imagePause.visibility = View.VISIBLE
-                ButtonplayerOne.text = "$times1:00";ButtonplayerTwo.text =
+                textButton1.text = "$times1:00";textButton2.text =
                 "$times1:00"
             }
         }
-
+        var clickCount1 = 0
+        var clickCount2 = 0
         binding.ImageReplay.setOnClickListener { startActivity(Intent(this, MainActivity::class.java))}
 
-        binding.ButtonplayerOne.setOnClickListener { if (a == 1 && b == 1) { playerOn = 2
-            binding.ButtonplayerOne.setBackgroundColor(Color.rgb(149, 149, 149));ButtonplayerOne.setTextColor(Color.BLACK)
-            binding.ButtonplayerTwo.setBackgroundColor(Color.rgb(244, 182, 59));ButtonplayerTwo.setTextColor(Color.WHITE);b = 2;time();mp.start()}}
+        binding.ButtonPlayerOne.setOnClickListener { if (a == 1 && b == 1) { playerOn = 2
+            var clickCount1 = 1+clickCount1++
+            clickCount1
+            textView6.text = "Moves : $clickCount1"
+            binding.ButtonPlayerOne.setBackgroundColor(Color.rgb(149, 149, 149))
+            binding.ButtonPlayerTwo.setBackgroundColor(Color.rgb(244, 182, 59));b = 2;time();mp.start()}}
 
-        binding.ButtonplayerTwo.setOnClickListener { if (a == 1 && b == 2) { playerOn = 1
-            binding.ButtonplayerTwo.setBackgroundColor(Color.rgb(149, 149, 149));ButtonplayerOne.setTextColor(Color.BLACK)
-            binding.ButtonplayerOne.setBackgroundColor(Color.rgb(244, 182, 59));ButtonplayerTwo.setTextColor(Color.WHITE);b = 1;time();mp.start()}}
+        binding.ButtonPlayerTwo.setOnClickListener { if (a == 1 && b == 2) { playerOn = 1
+            var clickCount2 = 1+clickCount2++
+            clickCount2
+            textView7.text = "Moves : $clickCount1"
+            binding.ButtonPlayerTwo.setBackgroundColor(Color.rgb(149, 149, 149))
+            binding.ButtonPlayerOne.setBackgroundColor(Color.rgb(244, 182, 59));b = 1;time();mp.start()}}
 
 
     }
@@ -85,7 +98,7 @@ class MainActivity : AppCompatActivity() {
                     if (time1 == 0 && time12 == 0){
                         output1 = "GAME OVER :( TRY AGAIN :)"
                     }
-                    Handler().postDelayed({ binding.ButtonplayerOne.text = output1 }, 1000)
+                    Handler().postDelayed({ binding.textButton1.text = output1 }, 1000)
                     Handler().postDelayed({ if (time1 <= 0 && time12 <= 0) { playerOn = 0 }
                     if (time12 >= 0 && playerOn == 1 && a == 1) { p1() } }, 1000)
 
@@ -100,7 +113,7 @@ class MainActivity : AppCompatActivity() {
                     if (time2 == 0 && time21 == 0){
                         output = "GAME OVER :( TRY AGAIN :)"
                     }
-                    Handler().postDelayed({ binding.ButtonplayerTwo.text = output }, 1000)
+                    Handler().postDelayed({ binding.textButton2.text = output }, 1000)
                     Handler().postDelayed({ if (time2 <= 0 && time21 <= 0) { playerOn = 0 }
                     if (time21 >= 0 && playerOn == 2 && a == 1) { p2() } }, 1000)
 

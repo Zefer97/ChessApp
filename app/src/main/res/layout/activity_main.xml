@@ -3,48 +3,108 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+    android:background="@color/cardview_dark_background"
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-
-    <Button
-        android:id="@+id/ButtonplayerOne"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/ButtonPlayerOne"
         android:layout_width="match_parent"
+        android:background="#959595"
         android:layout_height="0dp"
         android:layout_marginTop="20dp"
-        android:layout_weight="1"
-        android:text="@string/_5_00"
-        android:textSize="30sp"
+        android:clickable="true"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ButtonplayerTwo"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ButtonPlayerTwo"
         app:layout_constraintVertical_bias="0.5"
-        tools:ignore="MissingConstraints"
-        tools:layout_editor_absoluteX="0dp" />
+        tools:ignore="MissingConstraints">
 
-    <Button
-        android:id="@+id/ButtonplayerTwo"
+
+        <TextView
+            android:id="@+id/textButton1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:clickable="true"
+            android:text="@string/_5_00"
+            android:textSize="60sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.5" />
+
+        <TextView
+            android:id="@+id/textView6"
+            android:layout_marginTop="30dp"
+            android:layout_marginRight="20dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/moves"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/ButtonPlayerTwo"
         android:layout_width="match_parent"
         android:layout_height="0dp"
+        android:background="#959595"
         android:layout_marginBottom="20dp"
-        android:layout_weight="1"
+        android:clickable="true"
         android:scaleX="-1"
         android:scaleY="-1"
-        android:text="@string/_5_00"
-        android:textSize="30sp"
-        app:layout_constraintBottom_toTopOf="@+id/ButtonplayerOne"
+        app:layout_constraintBottom_toTopOf="@+id/ButtonPlayerOne"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.5"
-        tools:ignore="MissingConstraints" />
+        tools:ignore="MissingConstraints">
+
+        <TextView
+            android:id="@+id/textButton2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:clickable="true"
+            android:text="@string/_5_00"
+            android:textSize="60sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.5" />
+        <TextView
+            android:id="@+id/textView7"
+            android:layout_marginTop="30dp"
+            android:layout_marginRight="20dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/moves"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <ImageView
         android:id="@+id/imageSetting"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintBottom_toTopOf="@+id/ButtonplayerOne"
+
+        app:layout_constraintBottom_toTopOf="@+id/ButtonPlayerOne"
         app:layout_constraintEnd_toStartOf="@+id/imagePause"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ButtonplayerTwo"
+        app:layout_constraintTop_toBottomOf="@+id/ButtonPlayerTwo"
         app:layout_constraintVertical_bias="0.5"
         app:srcCompat="@drawable/settings" />
 
@@ -52,39 +112,39 @@
         android:id="@+id/imagePause"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintBottom_toTopOf="@+id/ButtonplayerOne"
+        app:layout_constraintBottom_toTopOf="@+id/ButtonPlayerOne"
         app:layout_constraintEnd_toStartOf="@+id/ImageReplay"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/imageSetting"
-        app:layout_constraintTop_toBottomOf="@+id/ButtonplayerTwo"
+        app:layout_constraintTop_toBottomOf="@+id/ButtonPlayerTwo"
         app:layout_constraintVertical_bias="0.5"
-        app:srcCompat="@drawable/play" />
+        app:srcCompat="@drawable/pause" />
 
     <ImageView
         android:id="@+id/ImageReplay"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintBottom_toTopOf="@+id/ButtonplayerOne"
+        app:layout_constraintBottom_toTopOf="@+id/ButtonPlayerOne"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/imagePause"
-        app:layout_constraintTop_toBottomOf="@+id/ButtonplayerTwo"
+        app:layout_constraintTop_toBottomOf="@+id/ButtonPlayerTwo"
         app:layout_constraintVertical_bias="0.5"
         app:srcCompat="@drawable/replay" />
 
     <EditText
-        android:id="@+id/timeedit"
+        android:id="@+id/timeEdit"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:ems="10"
+        android:hint="@string/amount_of_time_minutes"
         android:inputType="text"
         android:visibility="invisible"
-        android:hint="@string/amount_of_time_minutes"
-        app:layout_constraintBottom_toTopOf="@+id/ButtonplayerOne"
-        app:layout_constraintEnd_toStartOf="@+id/ButtonplayerTwo"
+        app:layout_constraintBottom_toTopOf="@+id/ButtonPlayerOne"
+        app:layout_constraintEnd_toStartOf="@+id/ButtonPlayerTwo"
         app:layout_constraintHorizontal_bias="0.538"
-        app:layout_constraintStart_toEndOf="@+id/ButtonplayerTwo"
-        app:layout_constraintTop_toBottomOf="@+id/ButtonplayerTwo"
+        app:layout_constraintStart_toEndOf="@+id/ButtonPlayerTwo"
+        app:layout_constraintTop_toBottomOf="@+id/ButtonPlayerTwo"
         app:layout_constraintVertical_bias="0.4" />
 
     <Button
@@ -92,9 +152,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
+        android:text="OK"
         android:visibility="invisible"
-        android:text="@string/ok"
-        app:layout_constraintBottom_toBottomOf="@+id/timeedit"
-        app:layout_constraintStart_toEndOf="@+id/timeedit" />
+        app:layout_constraintBottom_toBottomOf="@+id/timeEdit"
+        app:layout_constraintStart_toEndOf="@+id/timeEdit" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
