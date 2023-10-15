@@ -11,6 +11,10 @@ import androidx.appcompat.app.AppCompatActivity
 import com.example.foodapp.databinding.ActivityMainBinding
 import kotlinx.android.synthetic.main.activity_main.ImageReplay
 import kotlinx.android.synthetic.main.activity_main.button
+import kotlinx.android.synthetic.main.activity_main.buttonSetting1
+import kotlinx.android.synthetic.main.activity_main.buttonSetting2
+import kotlinx.android.synthetic.main.activity_main.editTextSetting1
+import kotlinx.android.synthetic.main.activity_main.editTextSetting2
 import kotlinx.android.synthetic.main.activity_main.imagePause
 import kotlinx.android.synthetic.main.activity_main.imageSetting
 import kotlinx.android.synthetic.main.activity_main.textButton1
@@ -55,6 +59,26 @@ class MainActivity : AppCompatActivity() {
                 imagePause.visibility = View.VISIBLE
                 textButton1.text = "$times1:00";textButton2.text =
                 "$times1:00"
+            }
+        }
+        binding.settingPlayerOne.setOnClickListener {
+            editTextSetting1.visibility = View.VISIBLE
+            buttonSetting1.visibility = View.VISIBLE
+            buttonSetting1.setOnClickListener {
+                times1 = editTextSetting1.text.toString();time1 = times1.toInt()
+                editTextSetting1.visibility = View.INVISIBLE
+                buttonSetting1.visibility= View.INVISIBLE;
+                textButton1.text = "$times1:00"
+            }
+        }
+        binding.settingPlayerTwo.setOnClickListener {
+            editTextSetting2.visibility = View.VISIBLE
+            buttonSetting2.visibility = View.VISIBLE
+            buttonSetting2.setOnClickListener {
+                times1 = editTextSetting2.text.toString();time2 = times1.toInt()
+                editTextSetting2.visibility = View.INVISIBLE
+                buttonSetting2.visibility= View.INVISIBLE;
+                textButton2.text = "$times1:00"
             }
         }
         var clickCount1 = 0
