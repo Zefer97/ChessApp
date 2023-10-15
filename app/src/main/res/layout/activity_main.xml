@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+
+    <Button
+        android:id="@+id/ButtonplayerOne"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginTop="20dp"
+        android:layout_weight="1"
+        android:text="@string/_5_00"
+        android:textSize="30sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ButtonplayerTwo"
+        app:layout_constraintVertical_bias="0.5"
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteX="0dp" />
+
+    <Button
+        android:id="@+id/ButtonplayerTwo"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginBottom="20dp"
+        android:layout_weight="1"
+        android:scaleX="-1"
+        android:scaleY="-1"
+        android:text="@string/_5_00"
+        android:textSize="30sp"
+        app:layout_constraintBottom_toTopOf="@+id/ButtonplayerOne"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.5"
+        tools:ignore="MissingConstraints" />
+
+    <ImageView
+        android:id="@+id/imageSetting"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toTopOf="@+id/ButtonplayerOne"
+        app:layout_constraintEnd_toStartOf="@+id/imagePause"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ButtonplayerTwo"
+        app:layout_constraintVertical_bias="0.5"
+        app:srcCompat="@drawable/settings" />
+
+    <ImageView
+        android:id="@+id/imagePause"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toTopOf="@+id/ButtonplayerOne"
+        app:layout_constraintEnd_toStartOf="@+id/ImageReplay"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/imageSetting"
+        app:layout_constraintTop_toBottomOf="@+id/ButtonplayerTwo"
+        app:layout_constraintVertical_bias="0.5"
+        app:srcCompat="@drawable/play" />
+
+    <ImageView
+        android:id="@+id/ImageReplay"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toTopOf="@+id/ButtonplayerOne"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/imagePause"
+        app:layout_constraintTop_toBottomOf="@+id/ButtonplayerTwo"
+        app:layout_constraintVertical_bias="0.5"
+        app:srcCompat="@drawable/replay" />
+
+    <EditText
+        android:id="@+id/timeedit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="text"
+        android:visibility="invisible"
+        android:hint="@string/amount_of_time_minutes"
+        app:layout_constraintBottom_toTopOf="@+id/ButtonplayerOne"
+        app:layout_constraintEnd_toStartOf="@+id/ButtonplayerTwo"
+        app:layout_constraintHorizontal_bias="0.538"
+        app:layout_constraintStart_toEndOf="@+id/ButtonplayerTwo"
+        app:layout_constraintTop_toBottomOf="@+id/ButtonplayerTwo"
+        app:layout_constraintVertical_bias="0.4" />
+
+    <Button
+        android:id="@+id/button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:visibility="invisible"
+        android:text="@string/ok"
+        app:layout_constraintBottom_toBottomOf="@+id/timeedit"
+        app:layout_constraintStart_toEndOf="@+id/timeedit" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
