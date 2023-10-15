@@ -1,22 +1,14 @@
 package com.example.foodapp
 
 import android.annotation.SuppressLint
-import android.content.Context
-import android.provider.Settings
-import android.app.Activity
-import android.view.WindowManager.LayoutParams
 import android.content.Intent
 import android.graphics.Color
 import android.media.MediaPlayer
-import android.os.Build
 import android.os.Bundle
 import android.os.Handler
 import android.view.View
-import android.view.WindowManager
+import android.view.View.INVISIBLE
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.WindowCompat
-import androidx.core.view.WindowInsetsCompat
-import androidx.core.view.WindowInsetsControllerCompat
 import com.example.foodapp.databinding.ActivityMainBinding
 import kotlinx.android.synthetic.main.activity_main.ImageReplay
 import kotlinx.android.synthetic.main.activity_main.button
@@ -59,8 +51,9 @@ class MainActivity : AppCompatActivity() {
             if (a == 2) {;a = 1;timerOn = true;time()
                 binding.ButtonPlayerTwo.setBackgroundColor(Color.rgb(149, 149, 149))
                 binding.ButtonPlayerOne.setBackgroundColor(Color.rgb(244, 182, 59))
-                binding.settingPlayerOne.visibility = View.INVISIBLE
-                binding.settingPlayerTwo.visibility = View.INVISIBLE}}
+                binding.settingPlayerOne.visibility = INVISIBLE
+                binding.settingPlayerTwo.visibility = INVISIBLE
+            }}
 
         binding.imageView3.setOnClickListener {
             if (a == 1) { ;a = 2;timerOn = false
@@ -72,13 +65,13 @@ class MainActivity : AppCompatActivity() {
         binding.imageSetting.setOnClickListener {
                 timeEdit.visibility = View.VISIBLE
                 button.visibility = View.VISIBLE
-                imageSetting.visibility = View.INVISIBLE
-                ImageReplay.visibility = View.INVISIBLE
-                imagePlayPause.visibility = View.INVISIBLE
+                imageSetting.visibility = INVISIBLE
+                ImageReplay.visibility = INVISIBLE
+                imagePlayPause.visibility = INVISIBLE
             button.setOnClickListener {
                 times1 = timeEdit.text.toString();time1 = times1.toInt();time2 = times1.toInt()
-                timeEdit.visibility = View.INVISIBLE
-                button.visibility= View.INVISIBLE;
+                timeEdit.visibility = INVISIBLE
+                button.visibility= INVISIBLE
                 imageSetting.visibility = View.VISIBLE
                 ImageReplay.visibility = View.VISIBLE
                 imagePlayPause.visibility = View.VISIBLE
@@ -91,8 +84,8 @@ class MainActivity : AppCompatActivity() {
             buttonSetting1.visibility = View.VISIBLE
             buttonSetting1.setOnClickListener {
                 times1 = editTextSetting1.text.toString();time1 = times1.toInt()
-                editTextSetting1.visibility = View.INVISIBLE
-                buttonSetting1.visibility= View.INVISIBLE;
+                editTextSetting1.visibility = INVISIBLE
+                buttonSetting1.visibility= INVISIBLE
                 textButton1.text = "$times1:00"
             }
         }
@@ -101,8 +94,8 @@ class MainActivity : AppCompatActivity() {
             buttonSetting2.visibility = View.VISIBLE
             buttonSetting2.setOnClickListener {
                 times1 = editTextSetting2.text.toString();time2 = times1.toInt()
-                editTextSetting2.visibility = View.INVISIBLE
-                buttonSetting2.visibility= View.INVISIBLE;
+                editTextSetting2.visibility = INVISIBLE
+                buttonSetting2.visibility= INVISIBLE
                 textButton2.text = "$times1:00"
             }
         }
@@ -110,16 +103,14 @@ class MainActivity : AppCompatActivity() {
         var clickCountButton2 = 0
 
         binding.ButtonPlayerOne.setOnClickListener { if (a == 1 && b == 1) { playerOn = 2
-            var clickCount1 = 1+clickCountButton1++
-            clickCount1
+            val clickCount1 = 1+clickCountButton1++
             textView6.text = "Moves : $clickCount1"
             binding.ButtonPlayerOne.setBackgroundColor(Color.rgb(149, 149, 149))
             binding.ButtonPlayerTwo.setBackgroundColor(Color.rgb(244, 182, 59));b = 2;time();mp.start()}}
 
         binding.ButtonPlayerTwo.setOnClickListener { if (a == 1 && b == 2) { playerOn = 1
-            var clickCount2 = 1+clickCountButton2++
-            clickCount2
-            textView7.text = "Moves : $clickCountButton1"
+            val clickCount2 = 1+clickCountButton2++
+            textView7.text = "Moves : $clickCount2"
             binding.ButtonPlayerTwo.setBackgroundColor(Color.rgb(149, 149, 149))
             binding.ButtonPlayerOne.setBackgroundColor(Color.rgb(244, 182, 59));b = 1;time();mp.start()}}
 
