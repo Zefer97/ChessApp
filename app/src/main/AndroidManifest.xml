@@ -4,6 +4,9 @@
     package="com.example.foodapp">
 
     <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.EXPAND_STATUS_BAR" />
+    <uses-permission android:name="android.permission.WRITE_SECURE_SETTINGS"
+        tools:ignore="ProtectedPermissions" />
 
     <application
         android:allowBackup="true"
@@ -11,7 +14,7 @@
         android:fullBackupContent="@xml/backup_rules"
         android:icon="@drawable/icon"
         android:usesCleartextTraffic="true"
-        android:label="Chess 1"
+        android:label="Chess Timer"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.FoodApp"

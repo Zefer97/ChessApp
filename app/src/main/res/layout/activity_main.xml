@@ -3,8 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:background="@color/cardview_dark_background"
     android:layout_height="match_parent"
+    android:background="@color/cardview_dark_background"
     tools:context=".MainActivity">
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -89,6 +89,17 @@
             app:layout_constraintStart_toEndOf="@+id/editTextSetting1"
             app:layout_constraintTop_toBottomOf="@+id/textView6"
             app:layout_constraintVertical_bias="0.746" />
+
+        <EditText
+            android:id="@+id/timeEdit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="@string/amount_of_time_minutes"
+            android:inputType="text"
+            android:visibility="invisible"
+            tools:layout_editor_absoluteX="69dp"
+            tools:layout_editor_absoluteY="30dp" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -184,7 +195,7 @@
         android:layout_height="wrap_content"
 
         app:layout_constraintBottom_toTopOf="@+id/ButtonPlayerOne"
-        app:layout_constraintEnd_toStartOf="@+id/imagePause"
+        app:layout_constraintEnd_toStartOf="@+id/imagePlayPause"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/ButtonPlayerTwo"
@@ -192,16 +203,15 @@
         app:srcCompat="@drawable/settings" />
 
     <ImageView
-        android:id="@+id/imagePause"
+        android:id="@+id/imagePlayPause"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toTopOf="@+id/ButtonPlayerOne"
-        app:layout_constraintEnd_toStartOf="@+id/ImageReplay"
-        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintEnd_toStartOf="@+id/imageView3"
         app:layout_constraintStart_toEndOf="@+id/imageSetting"
         app:layout_constraintTop_toBottomOf="@+id/ButtonPlayerTwo"
-        app:layout_constraintVertical_bias="0.5"
-        app:srcCompat="@drawable/pause" />
+        app:layout_constraintVertical_bias="0.25"
+        app:srcCompat="@drawable/play" />
 
     <ImageView
         android:id="@+id/ImageReplay"
@@ -209,26 +219,11 @@
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toTopOf="@+id/ButtonPlayerOne"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/imagePause"
+        app:layout_constraintHorizontal_bias="0.683"
+        app:layout_constraintStart_toEndOf="@+id/imagePlayPause"
         app:layout_constraintTop_toBottomOf="@+id/ButtonPlayerTwo"
-        app:layout_constraintVertical_bias="0.5"
+        app:layout_constraintVertical_bias="0.25"
         app:srcCompat="@drawable/replay" />
-
-    <EditText
-        android:id="@+id/timeEdit"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:hint="@string/amount_of_time_minutes"
-        android:inputType="text"
-        android:visibility="invisible"
-        app:layout_constraintBottom_toTopOf="@+id/ButtonPlayerOne"
-        app:layout_constraintEnd_toStartOf="@+id/ButtonPlayerTwo"
-        app:layout_constraintHorizontal_bias="0.538"
-        app:layout_constraintStart_toEndOf="@+id/ButtonPlayerTwo"
-        app:layout_constraintTop_toBottomOf="@+id/ButtonPlayerTwo"
-        app:layout_constraintVertical_bias="0.4" />
 
     <Button
         android:id="@+id/button"
@@ -239,6 +234,18 @@
         android:visibility="invisible"
         app:layout_constraintBottom_toBottomOf="@+id/timeEdit"
         app:layout_constraintStart_toEndOf="@+id/timeEdit" />
+
+    <ImageView
+        android:id="@+id/imageView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toTopOf="@+id/ButtonPlayerOne"
+        app:layout_constraintEnd_toStartOf="@+id/ImageReplay"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/imagePlayPause"
+        app:layout_constraintTop_toBottomOf="@+id/ButtonPlayerTwo"
+        app:layout_constraintVertical_bias="0.5"
+        app:srcCompat="@drawable/pause" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

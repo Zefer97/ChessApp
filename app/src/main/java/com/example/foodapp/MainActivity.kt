@@ -1,13 +1,22 @@
 package com.example.foodapp
 
 import android.annotation.SuppressLint
+import android.content.Context
+import android.provider.Settings
+import android.app.Activity
+import android.view.WindowManager.LayoutParams
 import android.content.Intent
 import android.graphics.Color
 import android.media.MediaPlayer
+import android.os.Build
 import android.os.Bundle
 import android.os.Handler
 import android.view.View
+import android.view.WindowManager
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.WindowCompat
+import androidx.core.view.WindowInsetsCompat
+import androidx.core.view.WindowInsetsControllerCompat
 import com.example.foodapp.databinding.ActivityMainBinding
 import kotlinx.android.synthetic.main.activity_main.ImageReplay
 import kotlinx.android.synthetic.main.activity_main.button
@@ -15,7 +24,7 @@ import kotlinx.android.synthetic.main.activity_main.buttonSetting1
 import kotlinx.android.synthetic.main.activity_main.buttonSetting2
 import kotlinx.android.synthetic.main.activity_main.editTextSetting1
 import kotlinx.android.synthetic.main.activity_main.editTextSetting2
-import kotlinx.android.synthetic.main.activity_main.imagePause
+import kotlinx.android.synthetic.main.activity_main.imagePlayPause
 import kotlinx.android.synthetic.main.activity_main.imageSetting
 import kotlinx.android.synthetic.main.activity_main.textButton1
 import kotlinx.android.synthetic.main.activity_main.textButton2
@@ -28,35 +37,51 @@ class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
     @SuppressLint("SetTextI18n")
     override fun onCreate(savedInstanceState: Bundle?) {
+//        window.setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN)
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         val view = binding.root
         setContentView(view)
         supportActionBar?.hide()
 
-        val mp = MediaPlayer.create(this,R.raw.click)
-        binding.imagePause.setOnClickListener {
-            if (a == 2) { binding.imagePause.setBackgroundResource(R.drawable.pause);a = 1;timerOn = true;time()
-                binding.ButtonPlayerTwo.setBackgroundColor(Color.rgb(149, 149, 149))
-                binding.ButtonPlayerOne.setBackgroundColor(Color.rgb(244, 182, 59))}
-            else if (a == 1) { binding.imagePause.setBackgroundResource(R.drawable.play);a = 2;timerOn = false
-                binding.ButtonPlayerTwo.setBackgroundColor(Color.rgb(149, 149, 149))
-                binding.ButtonPlayerOne.setBackgroundColor(Color.rgb(149, 149, 149))}
+        window.decorView.apply {
+            // Hide both the navigation bar and the status bar.
+            // SYSTEM_UI_FLAG_FULLSCREEN is only available on Android 4.1 and higher, but as
+            // a general rule, you should design your app to hide the status bar whenever you
+            // hide the navigation bar.
+            systemUiVisibility = View.SYSTEM_UI_FLAG_HIDE_NAVIGATION or View.SYSTEM_UI_FLAG_FULLSCREEN
         }
+        binding.ImageReplay.setOnClickListener { startActivity(Intent(this, MainActivity::class.java))}
+
+        val mp = MediaPlayer.create(this,R.raw.click)
+
+        binding.imagePlayPause.setOnClickListener {
+            if (a == 2) {;a = 1;timerOn = true;time()
+                binding.ButtonPlayerTwo.setBackgroundColor(Color.rgb(149, 149, 149))
+                binding.ButtonPlayerOne.setBackgroundColor(Color.rgb(244, 182, 59))
+                binding.settingPlayerOne.visibility = View.INVISIBLE
+                binding.settingPlayerTwo.visibility = View.INVISIBLE}}
+
+        binding.imageView3.setOnClickListener {
+            if (a == 1) { ;a = 2;timerOn = false
+                binding.settingPlayerOne.visibility = View.VISIBLE
+                binding.settingPlayerTwo.visibility = View.VISIBLE
+                binding.ButtonPlayerTwo.setBackgroundColor(Color.rgb(149, 149, 149))
+                binding.ButtonPlayerOne.setBackgroundColor(Color.rgb(149, 149, 149))} }
 
         binding.imageSetting.setOnClickListener {
                 timeEdit.visibility = View.VISIBLE
                 button.visibility = View.VISIBLE
                 imageSetting.visibility = View.INVISIBLE
                 ImageReplay.visibility = View.INVISIBLE
-                imagePause.visibility = View.INVISIBLE
+                imagePlayPause.visibility = View.INVISIBLE
             button.setOnClickListener {
                 times1 = timeEdit.text.toString();time1 = times1.toInt();time2 = times1.toInt()
                 timeEdit.visibility = View.INVISIBLE
                 button.visibility= View.INVISIBLE;
                 imageSetting.visibility = View.VISIBLE
                 ImageReplay.visibility = View.VISIBLE
-                imagePause.visibility = View.VISIBLE
+                imagePlayPause.visibility = View.VISIBLE
                 textButton1.text = "$times1:00";textButton2.text =
                 "$times1:00"
             }
@@ -81,21 +106,20 @@ class MainActivity : AppCompatActivity() {
                 textButton2.text = "$times1:00"
             }
         }
-        var clickCount1 = 0
-        var clickCount2 = 0
-        binding.ImageReplay.setOnClickListener { startActivity(Intent(this, MainActivity::class.java))}
+        var clickCountButton1 = 0
+        var clickCountButton2 = 0
 
         binding.ButtonPlayerOne.setOnClickListener { if (a == 1 && b == 1) { playerOn = 2
-            var clickCount1 = 1+clickCount1++
+            var clickCount1 = 1+clickCountButton1++
             clickCount1
             textView6.text = "Moves : $clickCount1"
             binding.ButtonPlayerOne.setBackgroundColor(Color.rgb(149, 149, 149))
             binding.ButtonPlayerTwo.setBackgroundColor(Color.rgb(244, 182, 59));b = 2;time();mp.start()}}
 
         binding.ButtonPlayerTwo.setOnClickListener { if (a == 1 && b == 2) { playerOn = 1
-            var clickCount2 = 1+clickCount2++
+            var clickCount2 = 1+clickCountButton2++
             clickCount2
-            textView7.text = "Moves : $clickCount1"
+            textView7.text = "Moves : $clickCountButton1"
             binding.ButtonPlayerTwo.setBackgroundColor(Color.rgb(149, 149, 149))
             binding.ButtonPlayerOne.setBackgroundColor(Color.rgb(244, 182, 59));b = 1;time();mp.start()}}
 
