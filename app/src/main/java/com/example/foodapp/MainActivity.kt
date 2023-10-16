@@ -2,7 +2,6 @@ package com.example.foodapp
 
 import android.annotation.SuppressLint
 import android.content.Intent
-import android.view.animation.Animation
 import android.view.animation.AnimationUtils
 import android.graphics.Color
 import android.media.MediaPlayer
