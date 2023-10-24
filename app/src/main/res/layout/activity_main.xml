@@ -67,6 +67,8 @@
             android:layout_height="wrap_content"
             android:ems="10"
             android:hint="@string/amount_of_time_minutes"
+            android:textColor="@color/white"
+            android:textColorHint="@color/white"
             android:inputType="number"
             android:visibility="invisible"
             app:layout_constraintBottom_toTopOf="@+id/settingPlayerOne"
@@ -98,7 +100,7 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:clickable="false"
-        android:layout_marginBottom="20dp"
+        android:layout_marginBottom="40dp"
         android:background="#959595"
         android:scaleX="-1"
         android:scaleY="-1"
@@ -154,6 +156,8 @@
             android:layout_height="wrap_content"
             android:ems="10"
             android:hint="@string/amount_of_time_minutes"
+            android:textColor="@color/white"
+            android:textColorHint="@color/white"
             android:inputType="number"
             android:visibility="invisible"
             app:layout_constraintBottom_toTopOf="@+id/settingPlayerTwo"
@@ -182,25 +186,15 @@
         android:id="@+id/imageSetting"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-
         app:layout_constraintBottom_toTopOf="@+id/ButtonPlayerOne"
-        app:layout_constraintEnd_toStartOf="@+id/imagePlay"
+        app:layout_constraintEnd_toStartOf="@+id/imagePause"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/ButtonPlayerTwo"
         app:layout_constraintVertical_bias="0.5"
         app:srcCompat="@drawable/settings" />
 
-    <ImageView
-        android:id="@+id/imagePlay"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintBottom_toTopOf="@+id/ButtonPlayerOne"
-        app:layout_constraintEnd_toStartOf="@+id/imagePause"
-        app:layout_constraintStart_toEndOf="@+id/imageSetting"
-        app:layout_constraintTop_toBottomOf="@+id/ButtonPlayerTwo"
-        app:layout_constraintVertical_bias="0.25"
-        app:srcCompat="@drawable/play" />
+
 
     <ImageView
         android:id="@+id/ImageReplay"
@@ -209,7 +203,7 @@
         app:layout_constraintBottom_toTopOf="@+id/ButtonPlayerOne"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.683"
-        app:layout_constraintStart_toEndOf="@+id/imagePlay"
+        app:layout_constraintStart_toEndOf="@+id/imagePause"
         app:layout_constraintTop_toBottomOf="@+id/ButtonPlayerTwo"
         app:layout_constraintVertical_bias="0.25"
         app:srcCompat="@drawable/replay" />
@@ -231,10 +225,10 @@
         app:layout_constraintBottom_toTopOf="@+id/ButtonPlayerOne"
         app:layout_constraintEnd_toStartOf="@+id/ImageReplay"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/imagePlay"
+        app:layout_constraintStart_toEndOf="@+id/imageSetting"
         app:layout_constraintTop_toBottomOf="@+id/ButtonPlayerTwo"
         app:layout_constraintVertical_bias="0.5"
-        app:srcCompat="@drawable/pause" />
+        app:srcCompat="@drawable/play" />
 
     <EditText
         android:id="@+id/timeEdit"
@@ -242,6 +236,7 @@
         android:layout_height="wrap_content"
         android:textColor="@color/white"
         android:textColorHint="@color/white"
+        android:imeOptions="actionDone"
         android:ems="10"
         android:hint="@string/amount_of_time_minutes"
         android:inputType="number"
