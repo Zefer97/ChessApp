@@ -13,6 +13,7 @@ import android.view.View.INVISIBLE
 import android.view.View.VISIBLE
 import android.view.inputmethod.InputMethodManager
 import androidx.appcompat.app.AppCompatActivity
+import com.example.foodapp.R.drawable
 import com.example.foodapp.databinding.ActivityMainBinding
 import kotlinx.android.synthetic.main.activity_main.ButtonPlayerOne
 import kotlinx.android.synthetic.main.activity_main.ButtonPlayerTwo
@@ -41,7 +42,6 @@ class MainActivity : AppCompatActivity() {
         val view = binding.root
         setContentView(view)
         supportActionBar?.hide()
-
         window.decorView.apply {
             systemUiVisibility =
                 View.SYSTEM_UI_FLAG_HIDE_NAVIGATION or View.SYSTEM_UI_FLAG_FULLSCREEN
@@ -54,18 +54,15 @@ class MainActivity : AppCompatActivity() {
                 )
             )
         }
-
         val click = MediaPlayer.create(this, R.raw.click)
         val animation = AnimationUtils.loadAnimation(this, R.anim.button_animation)
-
         binding.imagePause.setOnClickListener {
-            binding.settingPlayerOne.visibility = INVISIBLE
-            binding.settingPlayerTwo.visibility = INVISIBLE
             if (a == 2) {
-                binding.imagePause.setImageResource(R.drawable.pause)
+                binding.ButtonPlayerOne.isClickable = true
+                binding.ButtonPlayerTwo.isClickable = true
+                binding.imagePause.setImageResource(drawable.pause)
                 a = 1;timerOn = true;time()
                 binding.imageSetting.isClickable = false
-
                 if (a == 1 && b ==2 ){
                     binding.ButtonPlayerOne.setBackgroundColor(Color.rgb(149, 149, 149))
                     binding.ButtonPlayerTwo.setBackgroundColor(Color.rgb(244, 182, 59))
@@ -77,13 +74,17 @@ class MainActivity : AppCompatActivity() {
                 }
             }
             else if (a == 1) {
+                binding.ButtonPlayerOne.isClickable = false
+                binding.ButtonPlayerTwo.isClickable = false
                 binding.imageSetting.isClickable = true
-                binding.imagePause.setImageResource(R.drawable.play);a = 2;timerOn = false
+                binding.imagePause.setImageResource(drawable.play);a = 2;timerOn = false
                 textButton2.setTextColor(Color.BLACK)
                 textButton1.setTextColor(Color.BLACK)
                 binding.ButtonPlayerTwo.setBackgroundColor(Color.rgb(149, 149, 149))
                 binding.ButtonPlayerOne.setBackgroundColor(Color.rgb(149, 149, 149))
             }
+            binding.settingPlayerOne.visibility = INVISIBLE
+            binding.settingPlayerTwo.visibility = INVISIBLE
         }
 
         binding.imageSetting.setOnClickListener {
@@ -263,6 +264,8 @@ class MainActivity : AppCompatActivity() {
                 binding.settingPlayerTwo.visibility = INVISIBLE
                 ButtonPlayerOne.isClickable = true
                 textButton1.setTextColor(Color.WHITE)
+                binding.imagePause.setImageResource(drawable.pause)
+                binding.imageSetting.isClickable = false
             }
             ButtonPlayerOne.startAnimation(animation)
             time()
@@ -288,6 +291,8 @@ class MainActivity : AppCompatActivity() {
                 binding.settingPlayerOne.visibility = INVISIBLE
                 binding.settingPlayerTwo.visibility = INVISIBLE
                 textButton1.setTextColor(Color.WHITE)
+                binding.imagePause.setImageResource(drawable.pause)
+                binding.imageSetting.isClickable = false
             }
             ButtonPlayerTwo.startAnimation(animation)
             time()
