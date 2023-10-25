@@ -171,7 +171,7 @@ class MainActivity : AppCompatActivity() {
                     true
                 } else {
                     times1 = editTextSetting1.text.toString();time1 = times1.toInt()
-                    textButton1.text = "${times1}:${time12}".replace(" ", "")
+                    textButton1.text = "${times1}:${time12}0".replace(" ", "")
                     editTextSetting1.visibility = INVISIBLE
                     buttonSetting1.visibility = INVISIBLE
                     val imm = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
@@ -190,7 +190,7 @@ class MainActivity : AppCompatActivity() {
                     imm.hideSoftInputFromWindow(timeEdit.windowToken, 0)
                 } else {
                     times1 = editTextSetting1.text.toString();time1 = times1.toInt()
-                    textButton1.text = "${times1}:${time12}".replace(" ", "")
+                    textButton1.text = "${times1}:${time12}0".replace(" ", "")
                     editTextSetting1.visibility = INVISIBLE
                     buttonSetting1.visibility = INVISIBLE
                     val imm = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
@@ -217,7 +217,7 @@ class MainActivity : AppCompatActivity() {
                     times1 = editTextSetting2.text.toString();time2 = times1.toInt()
                     editTextSetting2.visibility = INVISIBLE
                     buttonSetting2.visibility = INVISIBLE
-                    textButton2.text = "${time2}:${time21}".replace(" ", "")
+                    textButton2.text = "${time2}:${time21}0".replace(" ", "")
                     val imm = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
                     imm.hideSoftInputFromWindow(timeEdit.windowToken, 0)
                     false
@@ -236,7 +236,7 @@ class MainActivity : AppCompatActivity() {
                     times1 = editTextSetting2.text.toString();time2 = times1.toInt()
                     editTextSetting2.visibility = INVISIBLE
                     buttonSetting2.visibility = INVISIBLE
-                    textButton2.text = "${time2}:${time21}".replace(" ", "")
+                    textButton2.text = "${time2}:${time21}0".replace(" ", "")
                     val imm = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
                     imm.hideSoftInputFromWindow(timeEdit.windowToken, 0)
                 }
