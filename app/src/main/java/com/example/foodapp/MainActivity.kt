@@ -114,8 +114,8 @@ class MainActivity : AppCompatActivity() {
                 }else{
                     times1 = timeEdit.text.toString();time1min = times1.toInt();time2min = times1.toInt()
                     ImageReplay.visibility = VISIBLE
-                    textButton1.text = "${times1}:${time1sec}0".replace(" ", "");textButton2.text =
-                        "${time1min}:${time2sec}0".replace(" ", "")
+                    textButton1.text = "0${times1}:${time1sec}0".replace(" ", "");textButton2.text =
+                        "0${time1min}:${time2sec}0".replace(" ", "")
                     false
                 }
             }
@@ -139,8 +139,8 @@ class MainActivity : AppCompatActivity() {
                     ImageReplay.visibility = VISIBLE
                     time1sec = 0
                     time2sec = 0
-                    textButton1.text = "${times1}:${time1sec}0".replace(" ", "");textButton2.text =
-                        "${time1min}:${time2sec}0".replace(" ", "")
+                    textButton1.text = "0${times1}:${time1sec}0".replace(" ", "");textButton2.text =
+                        "0${time1min}:${time2sec}0".replace(" ", "")
                 }
 
             }
@@ -168,7 +168,7 @@ class MainActivity : AppCompatActivity() {
                     true
                 } else {
                     times1 = editTextSetting1.text.toString();time1min = times1.toInt()
-                    textButton1.text = "${times1}:$time2sec".replace(" ", "")
+                    textButton1.text = "0${times1}:${time2sec}0".replace(" ", "")
                     false
                 }
             }
@@ -181,7 +181,7 @@ class MainActivity : AppCompatActivity() {
                     textButton1.text = "$time1min:$time1sec"
                 } else {
                     times1 = editTextSetting1.text.toString();time1min = times1.toInt()
-                    textButton1.text = "${times1}:$time1sec".replace(" ", "")
+                    textButton1.text = "0${times1}:${time2sec}0".replace(" ", "")
                 }
             }
         }
@@ -208,7 +208,7 @@ class MainActivity : AppCompatActivity() {
                     true
                 } else {
                     times1 = editTextSetting2.text.toString();time2min = times1.toInt()
-                    textButton2.text = "${time2min}:$time2sec".replace(" ", "")
+                    textButton2.text = "0${time2min}:${time2sec}0".replace(" ", "")
                     false
                 }
             }
@@ -221,7 +221,7 @@ class MainActivity : AppCompatActivity() {
                     textButton2.text = "$time2min:$time2sec"
                 } else {
                     times1 = editTextSetting2.text.toString();time2min = times1.toInt()
-                    textButton2.text = "${time2min}:$time2sec".replace(" ", "")
+                    textButton2.text = "0${time2min}:${time2sec}0".replace(" ", "")
                 }
             }
         }
@@ -295,12 +295,12 @@ class MainActivity : AppCompatActivity() {
                     if (time1sec == 0 && time1min != 0) {
                         time1min -= 1;time1sec = 60
                     }
-                    if (time1sec == 60){
-                        time1sec-=1
-                    }
-                    fun times(){time1sec -= 1}
-                    val output1 = "$time1min:$time1sec"
-                    Handler().postDelayed({ binding.textButton1.text = output1 }, 0)
+                    fun times() { time1sec -= 1 }
+//                   if (time1sec == 60) {
+//                       time1min = 1
+//                    }
+                    val formattedTime = String.format("%02d:%02d", time1min, time1sec)
+                    Handler().postDelayed({ binding.textButton1.text = formattedTime}, 0)
                     Handler().postDelayed({
                         if (time1min <= 0 && time1sec <= 0) {
                             playerOnline = 0
@@ -314,26 +314,24 @@ class MainActivity : AppCompatActivity() {
                             p1()
                         }
                     }, 1000)
-
                 }
                 p1()
             }
             if (playerOnline == 2) {
                 fun p2() {
                     if (time2sec == 0 && time2min != 0) {
-                        time2min -= 1;time2sec =60
+                        time2min -= 1;time2sec = 60
                     }
-                    if (time2sec == 60){
-                        time2sec-=1
-                    }
-                    fun times (){time2sec -= 1}
-                    val output = "$time2min:$time2sec"
-                    Handler().postDelayed({ binding.textButton2.text = output }, 0)
+                    fun times() { time2sec -= 1 }
+//                   if (time1sec == 60) {
+//                       time1min = 1
+//                    }
+                    val formattedTime = String.format("%02d:%02d", time2min, time2sec)
+                    Handler().postDelayed({ binding.textButton2.text = formattedTime}, 0)
                     Handler().postDelayed({
                         if (time2min <= 0 && time2sec <= 0) {
                             playerOnline = 0
-                            imagePause.visibility = INVISIBLE
-                            ButtonPlayerTwo.setBackgroundColor(Color.RED)
+                            ButtonPlayerOne.setBackgroundColor(Color.RED)
                             val lose = MediaPlayer.create(this, R.raw.loseeffect)
                             lose.start()
                             imagePause.visibility = INVISIBLE
@@ -343,7 +341,6 @@ class MainActivity : AppCompatActivity() {
                             p2()
                         }
                     }, 1000)
-
                 }
                 p2()
             }
