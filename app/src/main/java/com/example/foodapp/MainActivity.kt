@@ -75,25 +75,28 @@ class MainActivity : AppCompatActivity() {
             else if (a == 1) {
                 binding.ButtonPlayerOne.isClickable = false
                 binding.ButtonPlayerTwo.isClickable = false
-                binding.imageSetting.isClickable = true
                 binding.imagePause.setImageResource(drawable.play);a = 2;timerOn = false
                 textButton2.setTextColor(Color.BLACK)
                 textButton1.setTextColor(Color.BLACK)
                 binding.ButtonPlayerTwo.setBackgroundColor(Color.rgb(149, 149, 149))
                 binding.ButtonPlayerOne.setBackgroundColor(Color.rgb(149, 149, 149))
             }
-            binding.settingPlayerOne.visibility = INVISIBLE
-            binding.settingPlayerTwo.visibility = INVISIBLE
         }
 
         binding.imageSetting.setOnClickListener {
+            ButtonPlayerOne.isClickable =false
+            ButtonPlayerTwo.isClickable =false
             timeEdit.visibility = VISIBLE
             button.visibility = VISIBLE
             imageSetting.visibility = INVISIBLE
             ImageReplay.visibility = INVISIBLE
             imagePause.visibility = INVISIBLE
-            ButtonPlayerOne.isClickable = false
-            ButtonPlayerTwo.isClickable = false
+            if(a == 1){
+                binding.imagePause.setImageResource(drawable.play)
+                a = 2;timerOn = false
+                binding.ButtonPlayerTwo.setBackgroundColor(Color.rgb(149, 149, 149))
+                binding.ButtonPlayerOne.setBackgroundColor(Color.rgb(149, 149, 149))
+            }
             timeEdit.setOnEditorActionListener { _, _, _ ->
                 val imm = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
                 imm.hideSoftInputFromWindow(timeEdit.windowToken, 0)
@@ -101,8 +104,6 @@ class MainActivity : AppCompatActivity() {
                 button.visibility = INVISIBLE
                 imagePause.visibility = VISIBLE
                 imageSetting.visibility = VISIBLE
-                ButtonPlayerOne.isClickable = true
-                ButtonPlayerTwo.isClickable = true
                 if (timeEdit.text.isEmpty()) {
                     textButton1.text = "$time1min:00";textButton2.text =
                         "$time2min:00"
@@ -111,16 +112,14 @@ class MainActivity : AppCompatActivity() {
                 }else{
                     times1 = timeEdit.text.toString();time1min = times1.toInt();time2min = times1.toInt()
                     ImageReplay.visibility = VISIBLE
-                    textButton1.text = "${times1}:${time1sec} 0".replace(" ", "");textButton2.text =
-                        "${time1min}:${time2sec} 0".replace(" ", "")
+                    textButton1.text = "${times1}:${time1sec}".replace(" ", "");textButton2.text =
+                        "${time1min}:${time2sec}".replace(" ", "")
                     false
                 }
             }
             button.setOnClickListener {
                 val imm = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
                 imm.hideSoftInputFromWindow(timeEdit.windowToken, 0)
-                ButtonPlayerOne.isClickable = true
-                ButtonPlayerTwo.isClickable = true
                 if (timeEdit.text.isEmpty()) {
                     textButton1.text = "$time1min:00";textButton2.text =
                         "$time2min:00"
@@ -138,13 +137,19 @@ class MainActivity : AppCompatActivity() {
                     ImageReplay.visibility = VISIBLE
                     time1sec = 0
                     time2sec = 0
-                    textButton1.text = "${times1}:${time1sec} 0".replace(" ", "");textButton2.text =
-                        "${time1min}:${time2sec} 0".replace(" ", "")
+                    textButton1.text = "${times1}:${time1sec}".replace(" ", "");textButton2.text =
+                        "${time1min}:${time2sec}".replace(" ", "")
                 }
 
             }
         }
         binding.settingPlayerOne.setOnClickListener {
+            if(a == 1){
+                binding.imagePause.setImageResource(drawable.play)
+                a = 2;timerOn = false
+                binding.ButtonPlayerTwo.setBackgroundColor(Color.rgb(149, 149, 149))
+                binding.ButtonPlayerOne.setBackgroundColor(Color.rgb(149, 149, 149))
+            }
             editTextSetting1.visibility = VISIBLE
             buttonSetting1.visibility = VISIBLE
             ButtonPlayerOne.isClickable = false
@@ -154,14 +159,12 @@ class MainActivity : AppCompatActivity() {
                 buttonSetting1.visibility = INVISIBLE
                 val imm = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
                 imm.hideSoftInputFromWindow(timeEdit.windowToken, 0)
-                ButtonPlayerOne.isClickable = true
-                ButtonPlayerTwo.isClickable = true
                 if (editTextSetting1.text.isEmpty()) {
-                    textButton1.text = "$time1min:00"
+                    textButton1.text = "$time1min:$time1sec"
                     true
                 } else {
                     times1 = editTextSetting1.text.toString();time1min = times1.toInt()
-                    textButton1.text = "${times1}:${time1sec}0".replace(" ", "")
+                    textButton1.text = "${times1}:$time2sec".replace(" ", "")
                     false
                 }
             }
@@ -170,17 +173,21 @@ class MainActivity : AppCompatActivity() {
                 buttonSetting1.visibility = INVISIBLE
                 val imm = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
                 imm.hideSoftInputFromWindow(timeEdit.windowToken, 0)
-                ButtonPlayerOne.isClickable = true
-                ButtonPlayerTwo.isClickable = true
                 if (editTextSetting1.text.isEmpty()) {
-                    textButton1.text = "$time1min:00"
+                    textButton1.text = "$time1min:$time1sec"
                 } else {
                     times1 = editTextSetting1.text.toString();time1min = times1.toInt()
-                    textButton1.text = "${times1}:${time1sec}0".replace(" ", "")
+                    textButton1.text = "${times1}:$time1sec".replace(" ", "")
                 }
             }
         }
         binding.settingPlayerTwo.setOnClickListener {
+            if(a == 1){
+                binding.imagePause.setImageResource(drawable.play)
+                a = 2;timerOn = false
+                binding.ButtonPlayerTwo.setBackgroundColor(Color.rgb(149, 149, 149))
+                binding.ButtonPlayerOne.setBackgroundColor(Color.rgb(149, 149, 149))
+            }
             editTextSetting2.visibility = VISIBLE
             buttonSetting2.visibility = VISIBLE
             ButtonPlayerOne.isClickable = false
@@ -190,29 +197,25 @@ class MainActivity : AppCompatActivity() {
                 buttonSetting2.visibility = INVISIBLE
                 val imm = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
                 imm.hideSoftInputFromWindow(timeEdit.windowToken, 0)
-                ButtonPlayerOne.isClickable = true
-                ButtonPlayerTwo.isClickable = true
                 if (editTextSetting2.text.isEmpty()) {
-                    textButton2.text = "$time2min:00"
+                    textButton2.text = "$time2min:$time2sec"
                     true
                 } else {
                     times1 = editTextSetting2.text.toString();time2min = times1.toInt()
-                    textButton2.text = "${time2min}:${time2sec}0".replace(" ", "")
+                    textButton2.text = "${time2min}:$time2sec".replace(" ", "")
                     false
                 }
             }
             buttonSetting2.setOnClickListener {
-                ButtonPlayerOne.isClickable = true
-                ButtonPlayerTwo.isClickable = true
                 editTextSetting2.visibility = INVISIBLE
                 buttonSetting2.visibility = INVISIBLE
                 val imm = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
                 imm.hideSoftInputFromWindow(timeEdit.windowToken, 0)
                 if (editTextSetting2.text.isEmpty()) {
-                    textButton2.text = "$time2min:00"
+                    textButton2.text = "$time2min:$time2sec"
                 } else {
                     times1 = editTextSetting2.text.toString();time2min = times1.toInt()
-                    textButton2.text = "${time2min}:${time2sec}0".replace(" ", "")
+                    textButton2.text = "${time2min}:$time2sec".replace(" ", "")
                 }
             }
         }
@@ -234,12 +237,9 @@ class MainActivity : AppCompatActivity() {
                 a = 1 ;timerOn = true
                 binding.ButtonPlayerTwo.setBackgroundColor(Color.rgb(149, 149, 149))
                 binding.ButtonPlayerOne.setBackgroundColor(Color.rgb(244, 182, 59))
-                binding.settingPlayerOne.visibility = INVISIBLE
-                binding.settingPlayerTwo.visibility = INVISIBLE
                 ButtonPlayerOne.isClickable = true
                 textButton1.setTextColor(Color.WHITE)
                 binding.imagePause.setImageResource(drawable.pause)
-                binding.imageSetting.isClickable = false
             }
             ButtonPlayerOne.startAnimation(animation)
             time()
@@ -262,11 +262,8 @@ class MainActivity : AppCompatActivity() {
                 a = 1;timerOn = true
                 binding.ButtonPlayerTwo.setBackgroundColor(Color.rgb(149, 149, 149))
                 binding.ButtonPlayerOne.setBackgroundColor(Color.rgb(244, 182, 59))
-                binding.settingPlayerOne.visibility = INVISIBLE
-                binding.settingPlayerTwo.visibility = INVISIBLE
                 textButton1.setTextColor(Color.WHITE)
                 binding.imagePause.setImageResource(drawable.pause)
-                binding.imageSetting.isClickable = false
             }
             ButtonPlayerTwo.startAnimation(animation)
             time()
@@ -319,6 +316,9 @@ class MainActivity : AppCompatActivity() {
                 fun p2() {
                     if (time2sec == 0 && time2min != 0) {
                         time2min -= 1;time2sec =60
+                    }
+                    if (time2sec == 60){
+                        time2sec-=1
                     }
                     fun times (){time2sec -= 1}
                     val output = "$time2min:$time2sec"
