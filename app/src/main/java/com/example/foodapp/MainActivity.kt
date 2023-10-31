@@ -12,6 +12,7 @@ import android.view.View
 import android.view.View.INVISIBLE
 import android.view.View.VISIBLE
 import android.view.inputmethod.InputMethodManager
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import com.example.foodapp.R.drawable
 import com.example.foodapp.databinding.ActivityMainBinding
@@ -46,13 +47,35 @@ class MainActivity : AppCompatActivity() {
             systemUiVisibility =
                 View.SYSTEM_UI_FLAG_HIDE_NAVIGATION or View.SYSTEM_UI_FLAG_FULLSCREEN
         }
-        binding.ImageReplay.setOnClickListener {
-            startActivity(
-                Intent(
-                    this,
-                    MainActivity::class.java
+        val alertDialog = AlertDialog.Builder(this)
+            .setMessage("Reset the Clock")
+            .setPositiveButton("Yes") { _, _ ->
+                startActivity(
+                    Intent(
+                        this,
+                        MainActivity::class.java
+                    )
                 )
-            )
+            }
+            .setNegativeButton("No") { dialog, _ ->
+                dialog.dismiss()
+            }
+            .setCancelable(false)
+            .create()
+        Handler().postDelayed({
+            alertDialog.dismiss()
+        }, 5000)
+
+        binding.ImageReplay.setOnClickListener {
+            if(a == 1){
+                binding.imagePause.setImageResource(drawable.play)
+                a = 2;timerOn = false
+                binding.ButtonPlayerTwo.setBackgroundColor(Color.rgb(149, 149, 149))
+                binding.ButtonPlayerOne.setBackgroundColor(Color.rgb(149, 149, 149))
+                textButton1.setTextColor(Color.rgb(41,41,39))
+                textButton2.setTextColor(Color.rgb(41,41,39))
+            }
+            alertDialog.show()
         }
         val click = MediaPlayer.create(this, R.raw.click)
         val animation = AnimationUtils.loadAnimation(this, R.anim.button_animation)
@@ -107,15 +130,15 @@ class MainActivity : AppCompatActivity() {
                 imagePause.visibility = VISIBLE
                 imageSetting.visibility = VISIBLE
                 if (timeEdit.text.isEmpty()) {
-                    textButton1.text = "$time1min:00";textButton2.text =
-                        "$time2min:00"
+                    textButton1.text = "$time1min:00"
+                    textButton2.text = "$time2min:00"
                     a = 1;timerOn = true;time()
                     true
                 }else{
                     times1 = timeEdit.text.toString();time1min = times1.toInt();time2min = times1.toInt()
                     ImageReplay.visibility = VISIBLE
-                    textButton1.text = "${times1}:${time1sec}0".replace(" ", "");textButton2.text =
-                        "${time1min}:${time2sec}0".replace(" ", "")
+                    textButton1.text = String.format("%02d:%02d", time1min, time1sec)
+                    textButton2.text = String.format("%02d:%02d", time2min, time2sec)
                     false
                 }
             }
@@ -139,10 +162,9 @@ class MainActivity : AppCompatActivity() {
                     ImageReplay.visibility = VISIBLE
                     time1sec = 0
                     time2sec = 0
-                    textButton1.text = "${times1}:${time1sec}0".replace(" ", "");textButton2.text =
-                        "${time1min}:${time2sec}0".replace(" ", "")
+                    textButton1.text = String.format("%02d:%02d", time1min, time1sec)
+                    textButton2.text = String.format("%02d:%02d", time2min, time2sec)
                 }
-
             }
         }
         binding.settingPlayerOne.setOnClickListener {
@@ -168,7 +190,7 @@ class MainActivity : AppCompatActivity() {
                     true
                 } else {
                     times1 = editTextSetting1.text.toString();time1min = times1.toInt()
-                    textButton1.text = "${times1}:$time2sec".replace(" ", "")
+                    textButton1.text = String.format("%02d:%02d", time1min, time1sec)
                     false
                 }
             }
@@ -181,7 +203,7 @@ class MainActivity : AppCompatActivity() {
                     textButton1.text = "$time1min:$time1sec"
                 } else {
                     times1 = editTextSetting1.text.toString();time1min = times1.toInt()
-                    textButton1.text = "${times1}:$time1sec".replace(" ", "")
+                    textButton1.text = String.format("%02d:%02d", time1min, time1sec)
                 }
             }
         }
@@ -208,7 +230,7 @@ class MainActivity : AppCompatActivity() {
                     true
                 } else {
                     times1 = editTextSetting2.text.toString();time2min = times1.toInt()
-                    textButton2.text = "${time2min}:$time2sec".replace(" ", "")
+                    textButton2.text = String.format("%2d:%02d", time2min, time2sec)
                     false
                 }
             }
@@ -221,7 +243,7 @@ class MainActivity : AppCompatActivity() {
                     textButton2.text = "$time2min:$time2sec"
                 } else {
                     times1 = editTextSetting2.text.toString();time2min = times1.toInt()
-                    textButton2.text = "${time2min}:$time2sec".replace(" ", "")
+                    textButton2.text = String.format("%2d:%02d", time2min, time2sec)
                 }
             }
         }
@@ -299,7 +321,7 @@ class MainActivity : AppCompatActivity() {
 //                   if (time1sec == 60) {
 //                       time1min = 1
 //                    }
-                    val formattedTime = String.format("%2d:%02d", time1min, time1sec)
+                    val formattedTime = String.format("%02d:%02d", time1min, time1sec)
                     Handler().postDelayed({ binding.textButton1.text = formattedTime}, 0)
                     Handler().postDelayed({
                         if (time1min <= 0 && time1sec <= 0) {
@@ -326,7 +348,7 @@ class MainActivity : AppCompatActivity() {
 //                   if (time1sec == 60) {
 //                       time1min = 1
 //                    }
-                    val formattedTime = String.format("%2d:%02d", time2min, time2sec)
+                    val formattedTime = String.format("%02d:%02d", time2min, time2sec)
                     Handler().postDelayed({ binding.textButton2.text = formattedTime}, 0)
                     Handler().postDelayed({
                         if (time2min <= 0 && time2sec <= 0) {
