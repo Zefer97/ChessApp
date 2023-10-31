@@ -64,11 +64,11 @@ class MainActivity : AppCompatActivity() {
                 a = 1;timerOn = true;time()
                 if (a == 1 && b ==2 ){
                     binding.ButtonPlayerOne.setBackgroundColor(Color.rgb(149, 149, 149))
-                    binding.ButtonPlayerTwo.setBackgroundColor(Color.rgb(244, 182, 59))
+                    binding.ButtonPlayerTwo.setBackgroundColor(Color.rgb(127, 167, 81))
                     textButton2.setTextColor(Color.WHITE)
                 }else if(a == 1 && b == 1 ){
                     binding.ButtonPlayerTwo.setBackgroundColor(Color.rgb(149, 149, 149))
-                    binding.ButtonPlayerOne.setBackgroundColor(Color.rgb(244, 182, 59))
+                    binding.ButtonPlayerOne.setBackgroundColor(Color.rgb(127, 167, 81))
                     textButton1.setTextColor(Color.WHITE)
                 }
             }
@@ -76,8 +76,8 @@ class MainActivity : AppCompatActivity() {
                 binding.ButtonPlayerOne.isClickable = false
                 binding.ButtonPlayerTwo.isClickable = false
                 binding.imagePause.setImageResource(drawable.play);a = 2;timerOn = false
-                textButton2.setTextColor(Color.BLACK)
-                textButton1.setTextColor(Color.BLACK)
+                textButton2.setTextColor(Color.rgb(41,41,39))
+                textButton1.setTextColor(Color.rgb(41,41,39))
                 binding.ButtonPlayerTwo.setBackgroundColor(Color.rgb(149, 149, 149))
                 binding.ButtonPlayerOne.setBackgroundColor(Color.rgb(149, 149, 149))
             }
@@ -96,6 +96,8 @@ class MainActivity : AppCompatActivity() {
                 a = 2;timerOn = false
                 binding.ButtonPlayerTwo.setBackgroundColor(Color.rgb(149, 149, 149))
                 binding.ButtonPlayerOne.setBackgroundColor(Color.rgb(149, 149, 149))
+                textButton1.setTextColor(Color.rgb(41,41,39))
+                textButton2.setTextColor(Color.rgb(41,41,39))
             }
             timeEdit.setOnEditorActionListener { _, _, _ ->
                 val imm = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
@@ -112,8 +114,8 @@ class MainActivity : AppCompatActivity() {
                 }else{
                     times1 = timeEdit.text.toString();time1min = times1.toInt();time2min = times1.toInt()
                     ImageReplay.visibility = VISIBLE
-                    textButton1.text = "${times1}:${time1sec}".replace(" ", "");textButton2.text =
-                        "${time1min}:${time2sec}".replace(" ", "")
+                    textButton1.text = "${times1}:${time1sec}0".replace(" ", "");textButton2.text =
+                        "${time1min}:${time2sec}0".replace(" ", "")
                     false
                 }
             }
@@ -137,8 +139,8 @@ class MainActivity : AppCompatActivity() {
                     ImageReplay.visibility = VISIBLE
                     time1sec = 0
                     time2sec = 0
-                    textButton1.text = "${times1}:${time1sec}".replace(" ", "");textButton2.text =
-                        "${time1min}:${time2sec}".replace(" ", "")
+                    textButton1.text = "${times1}:${time1sec}0".replace(" ", "");textButton2.text =
+                        "${time1min}:${time2sec}0".replace(" ", "")
                 }
 
             }
@@ -149,6 +151,8 @@ class MainActivity : AppCompatActivity() {
                 a = 2;timerOn = false
                 binding.ButtonPlayerTwo.setBackgroundColor(Color.rgb(149, 149, 149))
                 binding.ButtonPlayerOne.setBackgroundColor(Color.rgb(149, 149, 149))
+                textButton1.setTextColor(Color.rgb(41,41,39))
+                textButton2.setTextColor(Color.rgb(41,41,39))
             }
             editTextSetting1.visibility = VISIBLE
             buttonSetting1.visibility = VISIBLE
@@ -187,6 +191,8 @@ class MainActivity : AppCompatActivity() {
                 a = 2;timerOn = false
                 binding.ButtonPlayerTwo.setBackgroundColor(Color.rgb(149, 149, 149))
                 binding.ButtonPlayerOne.setBackgroundColor(Color.rgb(149, 149, 149))
+                textButton1.setTextColor(Color.rgb(41,41,39))
+                textButton2.setTextColor(Color.rgb(41,41,39))
             }
             editTextSetting2.visibility = VISIBLE
             buttonSetting2.visibility = VISIBLE
@@ -227,16 +233,16 @@ class MainActivity : AppCompatActivity() {
                 val clickCount1 = 1 + clickCountButton1++
                 textView6.text = "Moves : $clickCount1"
                 binding.ButtonPlayerOne.setBackgroundColor(Color.rgb(149, 149, 149))
-                binding.ButtonPlayerTwo.setBackgroundColor(Color.rgb(244, 182, 59));b =
+                binding.ButtonPlayerTwo.setBackgroundColor(Color.rgb(127, 167, 81));b =
                     2;click.start()
                 ButtonPlayerOne.isClickable = false
                 textButton2.setTextColor(Color.WHITE)
-                textButton1.setTextColor(Color.BLACK)
+                textButton1.setTextColor(Color.rgb(41,41,39))
             }
             if (a == 2) {
                 a = 1 ;timerOn = true
                 binding.ButtonPlayerTwo.setBackgroundColor(Color.rgb(149, 149, 149))
-                binding.ButtonPlayerOne.setBackgroundColor(Color.rgb(244, 182, 59))
+                binding.ButtonPlayerOne.setBackgroundColor(Color.rgb(127, 167, 81))
                 ButtonPlayerOne.isClickable = true
                 textButton1.setTextColor(Color.WHITE)
                 binding.imagePause.setImageResource(drawable.pause)
@@ -252,16 +258,16 @@ class MainActivity : AppCompatActivity() {
                 val clickCount2 = 1 + clickCountButton2++
                 textView7.text = "Moves : $clickCount2"
                 binding.ButtonPlayerTwo.setBackgroundColor(Color.rgb(149, 149, 149))
-                binding.ButtonPlayerOne.setBackgroundColor(Color.rgb(244, 182, 59))
+                binding.ButtonPlayerOne.setBackgroundColor(Color.rgb(127, 167, 81))
                 b = 1;click.start()
-                textButton2.setTextColor(Color.BLACK)
+                textButton2.setTextColor(Color.rgb(41,41,39))
                 textButton1.setTextColor(Color.WHITE)
             }
 
             if (a == 2) {
                 a = 1;timerOn = true
                 binding.ButtonPlayerTwo.setBackgroundColor(Color.rgb(149, 149, 149))
-                binding.ButtonPlayerOne.setBackgroundColor(Color.rgb(244, 182, 59))
+                binding.ButtonPlayerOne.setBackgroundColor(Color.rgb(127, 167, 81))
                 textButton1.setTextColor(Color.WHITE)
                 binding.imagePause.setImageResource(drawable.pause)
             }
