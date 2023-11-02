@@ -62,72 +62,24 @@ class MainActivity : AppCompatActivity() {
 
     @SuppressLint("SetTextI18n")
     private fun initViewsClickListener() {
-//        binding.ButtonPlayerOne.setOnClickListener {
-//            if (a == 1 && b == 1) {
-//                selectedPlayer = PLAYER_TWO_INDEX
-//                val clickCount1 = 1 + clickCountButton1++
-//                binding.textView6.text = "Moves : $clickCount1"
-//                binding.ButtonPlayerOne.setBackgroundColor(Color.rgb(149, 149, 149))
-//                binding.ButtonPlayerTwo.setBackgroundColor(Color.rgb(127, 167, 81));b =
-//                    2;click.start()
-//                binding.ButtonPlayerOne.isClickable = false
-//                binding.textButton2.setTextColor(Color.WHITE)
-//                binding.textButton1.setTextColor(Color.rgb(41, 41, 39))
-//            }
-//            if (a == 2) {
-//                a = 1
-//                timerOn = true
-//                binding.ButtonPlayerTwo.setBackgroundColor(Color.rgb(149, 149, 149))
-//                binding.ButtonPlayerOne.setBackgroundColor(Color.rgb(127, 167, 81))
-//                binding.ButtonPlayerOne.isClickable = true
-//                binding.textButton1.setTextColor(Color.WHITE)
-//                binding.imagePause.setImageResource(drawable.pause)
-//            }
-//            binding.ButtonPlayerOne.startAnimation(animation)
-//            binding.ButtonPlayerTwo.isClickable = true
-//            initTimeDecreaseLogic()
-//        }
-//        binding.ButtonPlayerTwo.setOnClickListener {
-//            if (a == 1 && b == 2) {
-//                selectedPlayer = PLAYER_ONE_INDEX
-//                val clickCount2 = 1 + clickCountButton2++
-//                binding.textView7.text = "Moves : $clickCount2"
-//                binding.ButtonPlayerTwo.setBackgroundColor(Color.rgb(149, 149, 149))
-//                binding.ButtonPlayerOne.setBackgroundColor(Color.rgb(127, 167, 81))
-//                b = 1;click.start()
-//                binding.textButton2.setTextColor(Color.rgb(41, 41, 39))
-//                binding.textButton1.setTextColor(Color.WHITE)
-//            }
-//            if (a == 2) {
-//                a = 1;timerOn = true
-//                binding.ButtonPlayerTwo.setBackgroundColor(Color.rgb(149, 149, 149))
-//                binding.ButtonPlayerOne.setBackgroundColor(Color.rgb(127, 167, 81))
-//                binding.textButton1.setTextColor(Color.WHITE)
-//                binding.imagePause.setImageResource(drawable.pause)
-//            }
-//            binding.ButtonPlayerTwo.startAnimation(animation)
-//            binding.ButtonPlayerTwo.isClickable = false
-//            binding.ButtonPlayerOne.isClickable = true
-//            initTimeDecreaseLogic()
-//        }
         binding.ButtonPlayerOne.setOnClickListener {
-            if (a == 1 && b == 1) {
-                binding.ButtonPlayerOne.isClickable = false
-                click.start()
                 Handler().postDelayed({
-                    selectedPlayer = PLAYER_TWO_INDEX
-                    val clickCount1 = 1 + clickCountButton1++
-                    binding.textView6.text = "Moves : $clickCount1"
-                    binding.ButtonPlayerOne.setBackgroundColor(Color.rgb(149, 149, 149))
-                    binding.ButtonPlayerTwo.setBackgroundColor(Color.rgb(127, 167, 81))
-                    b = 2
-                    binding.textButton2.setTextColor(Color.WHITE)
-                    binding.textButton1.setTextColor(Color.rgb(41, 41, 39))
-                    binding.ButtonPlayerOne.startAnimation(animation)
-                    binding.ButtonPlayerTwo.isClickable = true
-                    initTimeDecreaseLogic()
+                    if (a == 1 && b == 1) {
+                        binding.ButtonPlayerOne.isClickable = false
+                        click.start()
+                        selectedPlayer = PLAYER_TWO_INDEX
+                        val clickCount1 = 1 + clickCountButton1++
+                        binding.textView6.text = "Moves : $clickCount1"
+                        binding.ButtonPlayerOne.setBackgroundColor(Color.rgb(149, 149, 149))
+                        binding.ButtonPlayerTwo.setBackgroundColor(Color.rgb(127, 167, 81))
+                        b = 2
+                        binding.textButton2.setTextColor(Color.WHITE)
+                        binding.textButton1.setTextColor(Color.rgb(41, 41, 39))
+                        binding.ButtonPlayerOne.startAnimation(animation)
+                        binding.ButtonPlayerTwo.isClickable = true
+                        initTimeDecreaseLogic()
+                    }
                 }, 500)
-            }
             if (a == 2) {
                 a = 1
                 startTimer = true
@@ -139,23 +91,24 @@ class MainActivity : AppCompatActivity() {
             }
         }
         binding.ButtonPlayerTwo.setOnClickListener {
-            if (a == 1 && b == 2) {
-                click.start()
                 Handler().postDelayed({
-                    selectedPlayer = PLAYER_ONE_INDEX
-                    val clickCount2 = 1 + clickCountButton2++
-                    binding.textView7.text = "Moves : $clickCount2"
-                    binding.ButtonPlayerTwo.setBackgroundColor(Color.rgb(149, 149, 149))
-                    binding.ButtonPlayerOne.setBackgroundColor(Color.rgb(127, 167, 81))
-                    b = 1
-                    binding.textButton2.setTextColor(Color.rgb(41, 41, 39))
-                    binding.textButton1.setTextColor(Color.WHITE)
-                    binding.ButtonPlayerTwo.startAnimation(animation)
-                    binding.ButtonPlayerTwo.isClickable = false
-                    binding.ButtonPlayerOne.isClickable = true
-                    initTimeDecreaseLogic()
+                    if (a == 1 && b == 2) {
+                        click.start()
+                        selectedPlayer = PLAYER_ONE_INDEX
+                        val clickCount2 = 1 + clickCountButton2++
+                        binding.textView7.text = "Moves : $clickCount2"
+                        binding.ButtonPlayerTwo.setBackgroundColor(Color.rgb(149, 149, 149))
+                        binding.ButtonPlayerOne.setBackgroundColor(Color.rgb(127, 167, 81))
+                        b = 1
+                        binding.textButton2.setTextColor(Color.rgb(41, 41, 39))
+                        binding.textButton1.setTextColor(Color.WHITE)
+                        binding.ButtonPlayerTwo.startAnimation(animation)
+                        binding.ButtonPlayerTwo.isClickable = false
+                        binding.ButtonPlayerOne.isClickable = true
+                        initTimeDecreaseLogic()
+                    }
                 }, 500)
-            }
+
             if (a == 2) {
                 a = 1
                 startTimer = true
