@@ -5,6 +5,7 @@ import android.content.Context
 import android.content.Intent
 import android.view.animation.AnimationUtils
 import android.graphics.Color
+import android.graphics.Color.rgb
 import android.media.MediaPlayer
 import android.os.Bundle
 import android.os.Handler
@@ -19,7 +20,6 @@ import com.example.foodapp.databinding.ActivityMainBinding
 import kotlinx.android.synthetic.main.activity_main.buttonSetting1
 import kotlinx.android.synthetic.main.activity_main.editTextSetting1
 import kotlinx.android.synthetic.main.activity_main.textButton1
-import kotlinx.android.synthetic.main.activity_main.textButton2
 import kotlinx.android.synthetic.main.activity_main.timeEdit
 
 @Suppress("DEPRECATION")
@@ -50,7 +50,7 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
-        val view = binding.root
+            val view = binding.root
         setContentView(view)
         supportActionBar?.hide()
         window.decorView.apply {
@@ -62,97 +62,92 @@ class MainActivity : AppCompatActivity() {
 
     @SuppressLint("SetTextI18n")
     private fun initViewsClickListener() {
+        fun buttonPlayerOnePauseColor(){
+            binding.ButtonPlayerOne.setBackgroundColor(rgb(149, 149, 149))
+        }
+        fun buttonPlayerTwoPauseColor(){
+            binding.ButtonPlayerTwo.setBackgroundColor(rgb(149, 149, 149))
+        }
+        fun buttonPlayerOnePlayColor(){
+            binding.ButtonPlayerOne.setBackgroundColor(rgb(127, 167, 81))
+        }
+        fun buttonPlayerTwoPlayColor(){
+            binding.ButtonPlayerTwo.setBackgroundColor(rgb(127, 167, 81))
+        }
+        fun textPlayerOnePlayColor(){
+            binding.textButton1.setTextColor(Color.WHITE)
+        }
+        fun textPlayerTwoPlayColor(){
+            binding.textButton2.setTextColor(Color.WHITE)
+        }
+        fun textPlayerOnePauseColor(){
+            binding.textButton1.setTextColor(rgb(41, 41, 39))
+        }
+        fun textPlayerTwoPauseColor(){
+            binding.textButton2.setTextColor(rgb(41, 41, 39))
+        }
+
         binding.ButtonPlayerOne.setOnClickListener {
-                Handler().postDelayed({
-                    if (a == 1 && b == 1) {
-                        binding.ButtonPlayerOne.isClickable = false
-                        click.start()
-                        selectedPlayer = PLAYER_TWO_INDEX
-                        val clickCount1 = 1 + clickCountButton1++
-                        binding.textView6.text = "Moves : $clickCount1"
-                        binding.ButtonPlayerOne.setBackgroundColor(Color.rgb(149, 149, 149))
-                        binding.ButtonPlayerTwo.setBackgroundColor(Color.rgb(127, 167, 81))
-                        b = 2
-                        binding.textButton2.setTextColor(Color.WHITE)
-                        binding.textButton1.setTextColor(Color.rgb(41, 41, 39))
-                        binding.ButtonPlayerOne.startAnimation(animation)
-                        binding.ButtonPlayerTwo.isClickable = true
-                        initTimeDecreaseLogic()
-                    }
-                }, 500)
-            if (a == 2) {
-                a = 1
-                startTimer = true
-                binding.ButtonPlayerTwo.setBackgroundColor(Color.rgb(149, 149, 149))
-                binding.ButtonPlayerOne.setBackgroundColor(Color.rgb(127, 167, 81))
-                binding.ButtonPlayerOne.isClickable = true
-                binding.textButton1.setTextColor(Color.WHITE)
-                binding.imagePause.setImageResource(drawable.pause)
+            val handler = Handler()
+            val myRunnable = Runnable {
+                if (startGame == START_GAME && player == PLAYER_1) {
+                    binding.ButtonPlayerOne.isClickable = false
+                    click.start()
+                    selectedPlayer = PLAYER_TWO_INDEX
+                    val clickCount1 = 1 + clickCountButton1++
+                    binding.moveCountTextViewP1.text = "Moves : $clickCount1"
+                    buttonPlayerOnePauseColor()
+                    buttonPlayerTwoPlayColor()
+                    player = PLAYER_2
+                    textPlayerTwoPlayColor()
+                    textPlayerOnePauseColor()
+                    binding.ButtonPlayerOne.startAnimation(animation)
+                    binding.ButtonPlayerTwo.isClickable = true
+                    initTimeDecreaseLogic()
+                } else if (startGame == STOP_GAME) {
+                    startGame = START_GAME
+                    startTimer = true
+                    buttonPlayerTwoPauseColor()
+                    buttonPlayerOnePlayColor()
+                    textPlayerOnePlayColor()
+                    binding.ButtonPlayerOne.isClickable = true
+                    binding.imagePause.setImageResource(drawable.pause)
+                    initTimeDecreaseLogic()
+                }
             }
+            handler.postDelayed(myRunnable, 1000)
+            handler.removeCallbacks(myRunnable,1000)
         }
         binding.ButtonPlayerTwo.setOnClickListener {
-                Handler().postDelayed({
-                    if (a == 1 && b == 2) {
-                        click.start()
-                        selectedPlayer = PLAYER_ONE_INDEX
-                        val clickCount2 = 1 + clickCountButton2++
-                        binding.textView7.text = "Moves : $clickCount2"
-                        binding.ButtonPlayerTwo.setBackgroundColor(Color.rgb(149, 149, 149))
-                        binding.ButtonPlayerOne.setBackgroundColor(Color.rgb(127, 167, 81))
-                        b = 1
-                        binding.textButton2.setTextColor(Color.rgb(41, 41, 39))
-                        binding.textButton1.setTextColor(Color.WHITE)
-                        binding.ButtonPlayerTwo.startAnimation(animation)
-                        binding.ButtonPlayerTwo.isClickable = false
-                        binding.ButtonPlayerOne.isClickable = true
-                        initTimeDecreaseLogic()
-                    }
-                }, 500)
-
-            if (a == 2) {
-                a = 1
-                startTimer = true
-                binding.ButtonPlayerTwo.setBackgroundColor(Color.rgb(149, 149, 149))
-                binding.ButtonPlayerOne.setBackgroundColor(Color.rgb(127, 167, 81))
-                binding.textButton1.setTextColor(Color.WHITE)
-                binding.imagePause.setImageResource(drawable.pause)
-            }
-        }
-        binding.ImageReplay.setOnClickListener {
-            if (a == 1) {
-                binding.imagePause.setImageResource(drawable.play)
-                a = 2;startTimer = false
-                binding.ButtonPlayerTwo.setBackgroundColor(Color.rgb(149, 149, 149))
-                binding.ButtonPlayerOne.setBackgroundColor(Color.rgb(149, 149, 149))
-                binding.textButton1.setTextColor(Color.rgb(41, 41, 39))
-                binding.textButton2.setTextColor(Color.rgb(41, 41, 39))
-            }
-            showResetTimerAlertDialogLogic()
-        }
-        binding.imagePause.setOnClickListener {
-            if (a == 2) {
-                binding.ButtonPlayerOne.isClickable = true
-                binding.ButtonPlayerTwo.isClickable = true
-                binding.imagePause.setImageResource(drawable.pause)
-                a = 1;startTimer = true;initTimeDecreaseLogic()
-                if (a == 1 && b == 2) {
-                    binding.ButtonPlayerOne.setBackgroundColor(Color.rgb(149, 149, 149))
-                    binding.ButtonPlayerTwo.setBackgroundColor(Color.rgb(127, 167, 81))
-                    binding.textButton2.setTextColor(Color.WHITE)
-                } else if (a == 1 && b == 1) {
-                    binding.ButtonPlayerTwo.setBackgroundColor(Color.rgb(149, 149, 149))
-                    binding.ButtonPlayerOne.setBackgroundColor(Color.rgb(127, 167, 81))
-                    binding.textButton1.setTextColor(Color.WHITE)
+            val handler = Handler()
+            val myRunnable = Runnable {
+                if (startGame == START_GAME && player == PLAYER_2) {
+                    player = PLAYER_1
+                    click.start()
+                    selectedPlayer = PLAYER_ONE_INDEX
+                    val clickCount2 = 1 + clickCountButton2++
+                    binding.moveCountTextViewP2.text = "Moves : $clickCount2"
+                    binding.ButtonPlayerTwo.startAnimation(animation)
+                    binding.ButtonPlayerTwo.isClickable = false
+                    binding.ButtonPlayerOne.isClickable = true
+                    buttonPlayerTwoPauseColor()
+                    buttonPlayerOnePlayColor()
+                    textPlayerTwoPauseColor()
+                    textPlayerOnePlayColor()
+                    initTimeDecreaseLogic()
+                } else if (startGame == STOP_GAME) {
+                    startGame = START_GAME
+                    startTimer = true
+                    binding.imagePause.setImageResource(drawable.pause)
+                    buttonPlayerTwoPauseColor()
+                    buttonPlayerOnePlayColor()
+                    textPlayerOnePlayColor()
+                    initTimeDecreaseLogic()
                 }
-            } else if (a == 1) {
-                binding.ButtonPlayerOne.isClickable = false
-                binding.ButtonPlayerTwo.isClickable = false
-                binding.imagePause.setImageResource(drawable.play);a = 2;startTimer = false
-                binding.textButton2.setTextColor(Color.rgb(41, 41, 39))
-                binding.textButton1.setTextColor(Color.rgb(41, 41, 39))
-                binding.ButtonPlayerTwo.setBackgroundColor(Color.rgb(149, 149, 149))
-                binding.ButtonPlayerOne.setBackgroundColor(Color.rgb(149, 149, 149))
             }
+            handler.postDelayed(myRunnable, 1000)
+            handler.removeCallbacks(myRunnable,1000)
+
         }
         binding.imageSetting.setOnClickListener {
             binding.ButtonPlayerOne.isClickable = false
@@ -162,13 +157,13 @@ class MainActivity : AppCompatActivity() {
             binding.imageSetting.visibility = INVISIBLE
             binding.ImageReplay.visibility = INVISIBLE
             binding.imagePause.visibility = INVISIBLE
-            if (a == 1) {
+            if (startGame == START_GAME) {
                 binding.imagePause.setImageResource(drawable.play)
-                a = 2;startTimer = false
-                binding.ButtonPlayerTwo.setBackgroundColor(Color.rgb(149, 149, 149))
-                binding.ButtonPlayerOne.setBackgroundColor(Color.rgb(149, 149, 149))
-                binding.textButton1.setTextColor(Color.rgb(41, 41, 39))
-                binding.textButton2.setTextColor(Color.rgb(41, 41, 39))
+                startGame = STOP_GAME;startTimer = false
+                buttonPlayerOnePauseColor()
+                buttonPlayerTwoPauseColor()
+                textPlayerOnePauseColor()
+                textPlayerTwoPauseColor()
             }
             binding.timeEdit.setOnEditorActionListener { _, _, _ ->
                 val imm = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
@@ -180,7 +175,7 @@ class MainActivity : AppCompatActivity() {
                 if (timeEdit.text.isEmpty()) {
                     binding.textButton1.text = String.format("%02d:%02d", time1min, time1sec)
                     binding.textButton2.text = String.format("%02d:%02d", time2min, time2sec)
-                    a = 1;startTimer = true;initTimeDecreaseLogic()
+                    startGame = START_GAME;startTimer = true;initTimeDecreaseLogic()
                     true
                 } else {
                     times1 = timeEdit.text.toString();time1min = times1.toInt();time2min =
@@ -194,22 +189,17 @@ class MainActivity : AppCompatActivity() {
             binding.button.setOnClickListener {
                 val imm = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
                 imm.hideSoftInputFromWindow(timeEdit.windowToken, 0)
+                binding.timeEdit.visibility = INVISIBLE
+                binding.button.visibility = INVISIBLE
+                binding.imagePause.visibility = VISIBLE
+                binding.imageSetting.visibility = VISIBLE
+                binding.ImageReplay.visibility = VISIBLE
                 if (timeEdit.text.isEmpty()) {
                     binding.textButton1.text = String.format("%02d:%02d", time1min, time1sec)
                     binding.textButton2.text = String.format("%02d:%02d", time2min, time2sec)
-                    binding.timeEdit.visibility = INVISIBLE
-                    binding.button.visibility = INVISIBLE
-                    binding.imagePause.visibility = VISIBLE
-                    binding.imageSetting.visibility = VISIBLE
-                    binding.ImageReplay.visibility = VISIBLE
                 } else {
                     times1 = timeEdit.text.toString();time1min = times1.toInt();time2min =
                         times1.toInt()
-                    binding.timeEdit.visibility = INVISIBLE
-                    binding.button.visibility = INVISIBLE
-                    binding.imagePause.visibility = VISIBLE
-                    binding.imageSetting.visibility = VISIBLE
-                    binding.ImageReplay.visibility = VISIBLE
                     time1sec = 0
                     time2sec = 0
                     binding.textButton1.text = String.format("%02d:%02d", time1min, time1sec)
@@ -217,14 +207,50 @@ class MainActivity : AppCompatActivity() {
                 }
             }
         }
-        binding.settingPlayerOne.setOnClickListener {
-            if (a == 1) {
+        binding.imagePause.setOnClickListener {
+            if (startGame == STOP_GAME) {
+                binding.ButtonPlayerOne.isClickable = true
+                binding.ButtonPlayerTwo.isClickable = true
+                binding.imagePause.setImageResource(drawable.pause)
+                startGame = START_GAME;startTimer = true;initTimeDecreaseLogic()
+                if (startGame == START_GAME && player == PLAYER_2) {
+                    buttonPlayerOnePauseColor()
+                    buttonPlayerTwoPlayColor()
+                    textPlayerTwoPlayColor()
+                } else if (startGame == START_GAME && player == PLAYER_1) {
+                    buttonPlayerTwoPauseColor()
+                    buttonPlayerOnePlayColor()
+                    textPlayerOnePlayColor()
+                }
+            } else if (startGame == START_GAME) {
+                binding.ButtonPlayerOne.isClickable = false
+                binding.ButtonPlayerTwo.isClickable = false
+                binding.imagePause.setImageResource(drawable.play);startGame = STOP_GAME;startTimer = false
+                textPlayerTwoPauseColor()
+                textPlayerOnePauseColor()
+                buttonPlayerOnePauseColor()
+                buttonPlayerTwoPauseColor()
+            }
+        }
+        binding.ImageReplay.setOnClickListener {
+            if (startGame == START_GAME) {
                 binding.imagePause.setImageResource(drawable.play)
-                a = 2;startTimer = false
-                binding.ButtonPlayerTwo.setBackgroundColor(Color.rgb(149, 149, 149))
-                binding.ButtonPlayerOne.setBackgroundColor(Color.rgb(149, 149, 149))
-                binding.textButton1.setTextColor(Color.rgb(41, 41, 39))
-                binding.textButton2.setTextColor(Color.rgb(41, 41, 39))
+                startGame = STOP_GAME;startTimer = false
+                buttonPlayerOnePauseColor()
+                buttonPlayerTwoPauseColor()
+                textPlayerOnePauseColor()
+                textPlayerTwoPauseColor()
+            }
+            showResetTimerAlertDialogLogic()
+        }
+        binding.settingPlayerOne.setOnClickListener {
+            if (startGame == START_GAME) {
+                binding.imagePause.setImageResource(drawable.play)
+                startGame = STOP_GAME;startTimer = false
+                buttonPlayerOnePauseColor()
+                buttonPlayerTwoPauseColor()
+                textPlayerOnePauseColor()
+                textPlayerTwoPauseColor()
             }
             binding.editTextSetting1.visibility = VISIBLE
             binding.buttonSetting1.visibility = VISIBLE
@@ -258,13 +284,13 @@ class MainActivity : AppCompatActivity() {
             }
         }
         binding.settingPlayerTwo.setOnClickListener {
-            if (a == 1) {
+            if (startGame == START_GAME) {
                 binding.imagePause.setImageResource(drawable.play)
-                a = 2;startTimer = false
-                binding.ButtonPlayerTwo.setBackgroundColor(Color.rgb(149, 149, 149))
-                binding.ButtonPlayerOne.setBackgroundColor(Color.rgb(149, 149, 149))
-                textButton1.setTextColor(Color.rgb(41, 41, 39))
-                textButton2.setTextColor(Color.rgb(41, 41, 39))
+                startGame = STOP_GAME;startTimer = false
+                buttonPlayerOnePauseColor()
+                buttonPlayerTwoPauseColor()
+                textPlayerOnePauseColor()
+                textPlayerTwoPauseColor()
             }
             binding.editTextSetting2.visibility = VISIBLE
             binding.buttonSetting2.visibility = VISIBLE
@@ -280,7 +306,7 @@ class MainActivity : AppCompatActivity() {
                     true
                 } else {
                     times1 = binding.editTextSetting2.text.toString();time2min = times1.toInt()
-                    binding. textButton2.text = String.format("%2d:%02d", time2min, time2sec)
+                    binding.textButton2.text = String.format("%2d:%02d", time2min, time2sec)
                     false
                 }
             }
@@ -300,14 +326,14 @@ class MainActivity : AppCompatActivity() {
     }
 
     private var times1 = ""
-    private var a = 2
+    private var startGame = STOP_GAME
     private var selectedPlayer = PLAYER_ONE_INDEX
     private var startTimer = false
     private var time1min = 5
     private var time2min = 5
     private var time1sec = 0
     private var time2sec = 0
-    private var b = 1
+    private var player = PLAYER_1
 
 
     private fun initTimeDecreaseLogic() {
@@ -330,7 +356,7 @@ class MainActivity : AppCompatActivity() {
                             lose.start()
                             binding.imagePause.visibility = INVISIBLE
                         }
-                        if (time1sec >= TIME_ZERO && selectedPlayer == PLAYER_ONE_INDEX && a == 1) {
+                        if (time1sec >= TIME_ZERO && selectedPlayer == PLAYER_ONE_INDEX && startGame == START_GAME) {
                             times()
                             p1()
                         }
@@ -351,12 +377,12 @@ class MainActivity : AppCompatActivity() {
                     Handler().postDelayed({
                         if (time2min <= TIME_ZERO && time2sec <= TIME_ZERO) {
                             selectedPlayer = PLAYER_DEFAULT_INDEX
-                            binding.ButtonPlayerOne.setBackgroundColor(Color.RED)
+                            binding.ButtonPlayerTwo.setBackgroundColor(Color.RED)
                             val lose = MediaPlayer.create(this, R.raw.loseeffect)
                             lose.start()
                             binding.imagePause.visibility = INVISIBLE
                         }
-                        if (time2sec >= TIME_ZERO && selectedPlayer == PLAYER_TWO_INDEX && a == 1) {
+                        if (time2sec >= TIME_ZERO && selectedPlayer == PLAYER_TWO_INDEX && startGame == START_GAME) {
                             times()
                             p2()
                         }
@@ -373,7 +399,7 @@ class MainActivity : AppCompatActivity() {
             if (alertDialog.isShowing) {
                 alertDialog.dismiss()
             }
-        }, 1000)
+        }, 5000)
     }
     companion object {
         const val PLAYER_DEFAULT_INDEX = 0
@@ -381,6 +407,10 @@ class MainActivity : AppCompatActivity() {
         const val PLAYER_TWO_INDEX = 2
         const val SECOND = 60
         const val TIME_ZERO = 0
+        const val STOP_GAME = 2
+        const val START_GAME = 1
+        const val PLAYER_1 = 1
+        const val PLAYER_2 = 2
     }
 }
 
