@@ -60,6 +60,19 @@ class MainActivity : AppCompatActivity() {
         initViewsClickListener()
     }
 
+    override fun onPause() {
+        // Uygulama arka plana geçtiğinde burada işlemleri durdurabilirsiniz
+        startGame = STOP_GAME
+        initTimeDecreaseLogic()
+        super.onPause()
+    }
+
+    override fun onResume() {
+        // Uygulama tekrar ön plana geldiğinde burada işlemleri başlatabilirsiniz
+        startGame = STOP_GAME
+        initTimeDecreaseLogic()
+        super.onResume()
+    }
     @SuppressLint("SetTextI18n")
     private fun initViewsClickListener() {
         fun buttonPlayerOnePauseColor(){
@@ -244,6 +257,9 @@ class MainActivity : AppCompatActivity() {
             showResetTimerAlertDialogLogic()
         }
         binding.settingPlayerOne.setOnClickListener {
+            binding.imagePause.isClickable = false
+            binding.imageSetting.isClickable = false
+            binding.ImageReplay.isClickable = false
             if (startGame == START_GAME) {
                 binding.imagePause.setImageResource(drawable.play)
                 startGame = STOP_GAME;startTimer = false
@@ -257,6 +273,9 @@ class MainActivity : AppCompatActivity() {
             binding.ButtonPlayerOne.isClickable = false
             binding.ButtonPlayerTwo.isClickable = false
             binding.editTextSetting1.setOnEditorActionListener { _, _, _ ->
+                binding.imagePause.isClickable = true
+                binding.imageSetting.isClickable = true
+                binding.ImageReplay.isClickable = true
                 binding.editTextSetting1.visibility = INVISIBLE
                 binding.buttonSetting1.visibility = INVISIBLE
                 val imm = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
@@ -271,6 +290,9 @@ class MainActivity : AppCompatActivity() {
                 }
             }
             binding.buttonSetting1.setOnClickListener {
+                binding.imagePause.isClickable = true
+                binding.imageSetting.isClickable = true
+                binding.ImageReplay.isClickable = true
                 editTextSetting1.visibility = INVISIBLE
                 buttonSetting1.visibility = INVISIBLE
                 val imm = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
@@ -287,6 +309,9 @@ class MainActivity : AppCompatActivity() {
             if (startGame == START_GAME) {
                 binding.imagePause.setImageResource(drawable.play)
                 startGame = STOP_GAME;startTimer = false
+                binding.imagePause.isClickable = false
+                binding.imageSetting.isClickable = false
+                binding.ImageReplay.isClickable = false
                 buttonPlayerOnePauseColor()
                 buttonPlayerTwoPauseColor()
                 textPlayerOnePauseColor()
@@ -297,6 +322,9 @@ class MainActivity : AppCompatActivity() {
             binding.ButtonPlayerOne.isClickable = false
             binding.ButtonPlayerTwo.isClickable = false
             binding.editTextSetting2.setOnEditorActionListener { _, _, _ ->
+                binding.imagePause.isClickable = true
+                binding.imageSetting.isClickable = true
+                binding.ImageReplay.isClickable = true
                 binding.editTextSetting2.visibility = INVISIBLE
                 binding.buttonSetting2.visibility = INVISIBLE
                 val imm = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
@@ -311,6 +339,9 @@ class MainActivity : AppCompatActivity() {
                 }
             }
             binding.buttonSetting2.setOnClickListener {
+                binding.imagePause.isClickable = true
+                binding.imageSetting.isClickable = true
+                binding.ImageReplay.isClickable = true
                 binding.editTextSetting2.visibility = INVISIBLE
                 binding.buttonSetting2.visibility = INVISIBLE
                 val imm = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
@@ -341,7 +372,7 @@ class MainActivity : AppCompatActivity() {
             if (selectedPlayer == PLAYER_ONE_INDEX) {
                 fun p1() {
                     if (time1sec == TIME_ZERO && time1min != TIME_ZERO) {
-                        time1min -= 1;time1sec = SECOND
+                        time1min -= 1;time1sec = TIME_SECONDS
                     }
                     fun times() {
                         time1sec -= 1
@@ -367,7 +398,7 @@ class MainActivity : AppCompatActivity() {
             if (selectedPlayer == PLAYER_TWO_INDEX) {
                 fun p2() {
                     if (time2sec == TIME_ZERO && time2min != TIME_ZERO) {
-                        time2min -= 1;time2sec = SECOND
+                        time2min -= 1;time2sec = TIME_SECONDS
                     }
                     fun times() {
                         time2sec -= 1
@@ -405,7 +436,7 @@ class MainActivity : AppCompatActivity() {
         const val PLAYER_DEFAULT_INDEX = 0
         const val PLAYER_ONE_INDEX = 1
         const val PLAYER_TWO_INDEX = 2
-        const val SECOND = 60
+        const val TIME_SECONDS = 60
         const val TIME_ZERO = 0
         const val STOP_GAME = 2
         const val START_GAME = 1
