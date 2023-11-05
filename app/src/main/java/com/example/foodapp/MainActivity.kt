@@ -61,14 +61,12 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onPause() {
-        // Uygulama arka plana geçtiğinde burada işlemleri durdurabilirsiniz
         startGame = STOP_GAME
         initTimeDecreaseLogic()
         super.onPause()
     }
 
     override fun onResume() {
-        // Uygulama tekrar ön plana geldiğinde burada işlemleri başlatabilirsiniz
         startGame = STOP_GAME
         initTimeDecreaseLogic()
         super.onResume()
